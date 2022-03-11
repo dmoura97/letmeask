@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -37,13 +38,25 @@ export function Home() {
     const room = await get(roomRef);
 
     if(!room.exists()) {
-      alert("Room does not exists.");
+      toast.error("Room does not exists.", {
+        duration: 3000,
+        position: "top-center",
+        style: {
+          width: "250px",
+        }
+      });
       setRoomCode('');
       return;
     }
 
     if(room.val().endedAt) {
-      alert("Room already closed.")
+      toast.error("Room already closed.", {
+        duration: 3000,
+        position: "top-center",
+        style: {
+          width: "250px",
+        }
+      });
       setRoomCode('');
       return;
     }
@@ -77,6 +90,7 @@ export function Home() {
               Entrar na sala
             </Button>
           </form>
+          <Toaster />
         </div>
       </main>
     </div>
