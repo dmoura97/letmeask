@@ -41,6 +41,12 @@ export function Home() {
       setRoomCode('');
       return;
     }
+
+    if(room.val().endedAt) {
+      alert("Room already closed.")
+      setRoomCode('');
+      return;
+    }
     
     history(`/rooms/${roomCode}`)
   }
